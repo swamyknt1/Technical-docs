@@ -1,0 +1,13 @@
+configuring splunk agent on prod-cs-fmcg-01 and configure index "cstore" in splunk.
+1.Navigate to cd /opt
+2.sftp admin@release.xidio.com
+3.admin@release.xidio.com's password:watchable
+4.sftp> get home/splunk/splunkforwarder-6.5.0-59c8927def0f-linux-2.6-amd64.deb 
+5.sftp> exit
+6.dpkg -i splunkforwarder-6.5.0-59c8927def0f-linux-2.6-amd64.deb 
+7./opt/splunkforwarder/bin/splunk enable boot-start --accept-license
+8./opt/splunkforwarder/bin/splunk start
+9.opt/splunkforwarder/bin/splunk add forward-server 172.31.2.29:9996
+10.service splunk restart
+11./opt/splunkforwarder/bin/splunk add monitor -auth admin:changeme /opt/fabric/fmcg/logs/fmcg.log -index cstore -sourcetype fmcg
+12.service splunk restart
